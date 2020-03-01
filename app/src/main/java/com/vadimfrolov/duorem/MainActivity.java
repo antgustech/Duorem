@@ -8,6 +8,7 @@ package com.vadimfrolov.duorem;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,7 +19,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -101,7 +104,10 @@ public class MainActivity extends ActivityNet
                 logForUser(getResources().getString(R.string.reboot_sent));
             }
         });
+        mBtnRestart.setOnTouchListener(mTouchActor);
+
         mBtnTogglePower.setOnClickListener(mPowerActor);
+        mBtnTogglePower.setOnTouchListener(mTouchActor);
 
         // create a pool with only 3 threads
         mSch = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(3);
@@ -316,6 +322,26 @@ public class MainActivity extends ActivityNet
             mSshTasks.peek().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, cmd);
         }
     };
+
+    private OnTouchListener mTouchActor = new OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    v.getBackground().setColorFilter(0xeff4081, PorterDuff.Mode.SRC_ATOP); //FF4081
+                    v.invalidate();
+                    break;
+                }
+                case MotionEvent.ACTION_UP: {
+                    v.getBackground().clearColorFilter();
+                    v.invalidate();
+                    break;
+                }
+            }
+            return false;
+        }
+};
+
 
     private void startTargetPolling() {
         Runnable pollTask = new Runnable() {

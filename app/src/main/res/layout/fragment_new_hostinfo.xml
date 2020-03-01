@@ -34,5 +34,6 @@
         app:layout_constraintLeft_toRightOf="@+id/alive"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_creator="1"
+        android:textColor="@color/greyWhite"
         />
 </android.support.constraint.ConstraintLayout>

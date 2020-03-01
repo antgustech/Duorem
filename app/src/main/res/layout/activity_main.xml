@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:textColor="@color/greyWhite"
     tools:context=".MainActivity">
+
 
     <include layout="@layout/toolbar_layout"
         android:id="@+id/app_bar"
@@ -13,6 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+
         />
 
     <include layout="@layout/fragment_new_hostinfo"
@@ -27,7 +31,10 @@
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
         android:layout_height="0dp"
-        android:layout_width="0dp" />
+        android:layout_width="0dp"
+        android:textColor="@color/greyWhite"
+
+        />
 
     <Button
         android:id="@+id/btn_toggle_power"
@@ -44,6 +51,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/btn_restart"
         app:layout_constraintVertical_weight="1"
+        android:background="@color/mainButtonColor"
+        android:textColor="@color/greyWhite"
         />
 
     <Button
@@ -61,6 +70,8 @@
         app:layout_constraintLeft_toRightOf="@+id/btn_toggle_power"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintVertical_weight="1"
+        android:background="@color/mainButtonColor"
+        android:textColor="@color/greyWhite"
         />
 
     <TextView
@@ -79,5 +90,6 @@
         android:layout_marginRight="5dp"
         android:layout_marginEnd="5dp"
         android:scrollbars="vertical"
+        android:textColor="@color/greyWhite"
         />
 </android.support.constraint.ConstraintLayout>
