@@ -51,6 +51,7 @@
     <string name="mac_separator" translatable="false">:</string>
     <string name="save">Save</string>
     <string name="show_advanced">Advanced details</string>
+    <string name="auto_start">Wake on start</string>
     <string name="shutdown_cmd">Shutdown command</string>
 
     <!-- used on About dialog -->

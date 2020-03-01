@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -64,6 +65,7 @@ public class TargetConfigurationFragment extends Fragment {
     private List<EditText> mEditMac;
     private View mViewShutdownCmd;
     private TextInputEditText mEditShutdownCmd;
+    private Switch mSwitchAutoStart;
 
     private boolean mIsTablet = false;
     SharedPreferences mPrefs;
@@ -123,6 +125,7 @@ public class TargetConfigurationFragment extends Fragment {
         mEditSshPassword = (TextInputEditText)v.findViewById(R.id.edit_ssh_password);
         mEditSshPort = (TextInputEditText) v.findViewById(R.id.edit_ssh_port);
         mSwitchAdvanced = (Switch) v.findViewById(R.id.switch_advanced);
+        mSwitchAutoStart = (Switch) v.findViewById(R.id.switch_advanced_auto_start);
 
         mEditShutdownCmd = (TextInputEditText) v.findViewById(R.id.edit_shutdown_cmd);
         mViewShutdownCmd = v.findViewById(R.id.input_layout_shutdown_cmd);
@@ -304,7 +307,7 @@ public class TargetConfigurationFragment extends Fragment {
                 mHostBean.sshPassword = mEditSshPassword.getText().toString();
                 mHostBean.sshPort = mEditSshPort.getText().toString();
                 mHostBean.sshShutdownCmd = mEditShutdownCmd.getText().toString();
-
+                mHostBean.autoStart = mSwitchAutoStart.isChecked();
                 saveTargetToSettings();
 
                 Intent startMain = new Intent(mContext, MainActivity.class);
@@ -342,6 +345,7 @@ public class TargetConfigurationFragment extends Fragment {
         mEditSshPassword.setText(mHostBean.sshPassword);
         mEditSshPort.setText(mHostBean.sshPort);
         mEditShutdownCmd.setText(mHostBean.sshShutdownCmd);
+        mSwitchAutoStart.setChecked(mHostBean.autoStart);
     }
 
     private void mac2Fields(String macAddress) {

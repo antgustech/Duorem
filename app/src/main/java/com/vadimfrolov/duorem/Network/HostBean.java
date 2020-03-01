@@ -34,6 +34,8 @@ public class HostBean implements Parcelable {
     /** Wake On Lan port */
     public String wolPort = "9";
     public String broadcastIp = null;
+    //Auto start toggle
+    public boolean autoStart = false;
 
     public HostBean() {
         // New object
@@ -46,7 +48,7 @@ public class HostBean implements Parcelable {
 
     // full constructor
     public HostBean(String hostname, String ipAddress, String wolPort, String macAddress, String sshUsername,
-                    String sshPassword, String sshPort, String broadcastIp/*, String sshShutdownCmd*/) {
+                    String sshPassword, String sshPort, String broadcastIp, boolean autoStart/*, String sshShutdownCmd*/) {
         this.hostname = hostname;
         this.ipAddress = ipAddress;
         this.wolPort = wolPort;
@@ -56,6 +58,7 @@ public class HostBean implements Parcelable {
         this.sshPort = sshPort;
         this.broadcastIp = broadcastIp;
         this.sshShutdownCmd = sshShutdownCmd;
+        this.autoStart = autoStart;
     }
 
     public int describeContents() {
@@ -73,6 +76,7 @@ public class HostBean implements Parcelable {
         dest.writeString(wolPort);
         dest.writeString(broadcastIp);
         dest.writeString(sshShutdownCmd);
+        dest.writeInt(autoStart ? 1 : 0);
     }
 
     private void readFromParcel(Parcel in) {
@@ -86,6 +90,7 @@ public class HostBean implements Parcelable {
         wolPort = in.readString();
         broadcastIp = in.readString();
         sshShutdownCmd = in.readString();
+        autoStart = in.readInt() == 1;
     }
 
     public String name() {
@@ -123,6 +128,7 @@ public class HostBean implements Parcelable {
         hostname = "";
         broadcastIp = NetInfo.NOIP;
         sshShutdownCmd = SHUTDOWN_CMD;
+        autoStart = false;
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

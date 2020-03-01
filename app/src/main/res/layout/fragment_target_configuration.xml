@@ -384,20 +384,36 @@
         </android.support.design.widget.TextInputLayout>
 
         <!-- Advanced options -->
+
+        <!-- Shutdown command -->
+
         <Switch
             android:id="@+id/switch_advanced"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
             android:nextFocusForward="@+id/edit_wol_port"
+            android:switchPadding="2dp"
             android:text="@string/show_advanced"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/input_layout_ssh_port" />
 
-        <!-- Shutdown command -->
+        <Switch
+            android:id="@+id/switch_advanced_auto_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:nextFocusForward="@+id/edit_wol_port"
+            android:switchPadding="22dp"
+            android:text="@string/auto_start"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_layout_ssh_port" />
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_shutdown_cmd"
             android:layout_width="0dp"

@@ -106,6 +106,9 @@ public class MainActivity extends ActivityNet
         // create a pool with only 3 threads
         mSch = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(3);
         mSch.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
+
+
+
     }
 
     @Override
@@ -131,6 +134,9 @@ public class MainActivity extends ActivityNet
         if (mIsConnected && mTarget != null && mTarget.ipAddress != null && !mTarget.ipAddress.equals(NetInfo.NOIP)) {
             startTargetPolling();
         }
+
+
+
         updateView();
     }
 
@@ -228,12 +234,25 @@ public class MainActivity extends ActivityNet
         }
     }
 
+    //Send wake signal whenever app is opened and a device is configured
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mTarget != null  && mTarget.autoStart){
+            mBtnTogglePower.post(new Runnable() {
+                @Override
+                public void run() {
+                    mBtnTogglePower.performClick();
+                }
+            });
+        }
+    }
+
     protected void updateView() {
         mBtnTogglePower.setEnabled(mIsConnected && mTarget != null);
         if (!mIsConnected) {
             mViewStatus.setText(getResources().getString(R.string.no_network));
         }
-
         boolean isTargetValid = true;
         boolean isTargetAlive = mTarget != null && mTarget.isAlive;
         if (mTarget == null || (mTarget.ipAddress.equals(NetInfo.NOIP) && mTarget.hardwareAddress.equals(NetInfo.NOMAC))) {
